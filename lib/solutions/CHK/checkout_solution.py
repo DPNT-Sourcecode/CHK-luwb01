@@ -26,30 +26,13 @@ def checkout(skus,
 
     sku_count_dict = dict(Counter(skus_list))
 
-    # sum = 0
-    # for k, v in sku_count_dict.items():
-    #     if k in specials:
-    #         if v % specials[k][0] == 0:
-    #             sum += (v / specials[k][0]) * specials[k][1]
-    #         else:
-    #             sum += prices[k] * v
-    #     else:
-    #         sum += prices[k] * v
-
-    # return int(sum)
-
     sum = 0
     for k, v in sku_count_dict.items():
         if k in specials:
-            if v == specials[k][0]:
-                sum += (v / specials[k][0]) * specials[k][1]
-            elif v > specials[k][0]:
-                pass
-            else:
-                sum += prices[k] * v
+            num_specials = v // specials[k][0]
+            remainder = v % specials[k][0]
+            sum += (num_specials * specials[k][1]) + (remainder * prices[k])
         else:
-            sum += prices[k] * v
+            sum += v * prices[k]
 
     return int(sum)
-
-print(checkout('AAAA'))
