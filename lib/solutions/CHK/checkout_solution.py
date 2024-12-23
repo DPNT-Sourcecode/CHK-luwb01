@@ -78,6 +78,7 @@ def checkout(skus,
         total_group_items = sum(group_counts.values())
 
         num_offers = total_group_items // qt
+        
         if num_offers > 0:
             remaining_items = total_group_items % qt
 
@@ -88,8 +89,10 @@ def checkout(skus,
             for item, cnt in sorted_items:
                 if remove_items > 0:
                     used = min(cnt, remove_items)
-
-
+                    sku_count_dict[item] -= used
+                    remove_items -= used
+        
+        sum += num_offers * offer_price
 
     for k, v in sku_count_dict.items():
         if v <= 0:
@@ -130,5 +133,6 @@ def checkout(skus,
 
     return int(sum)
 
+print(checkout('STX'))
 
 
