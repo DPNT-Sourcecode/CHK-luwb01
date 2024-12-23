@@ -113,5 +113,3 @@ def checkout(skus,
 
     return int(sum)
 
-
-
