@@ -107,5 +107,3 @@ def checkout(skus,
             sum += v * prices[k]
 
     return int(sum)
-
-print(checkout('VV'))
