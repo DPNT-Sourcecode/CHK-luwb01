@@ -32,7 +32,7 @@ def checkout(skus,
             specials = {'A': [(3, 130), (5, 200)],
                         'B': (2, 45),
                         'H': [(5, 45), (10, 80)],
-                        'K': (2, 150),
+                        'K': (2, 120),
                         'P': (5, 200),
                         'Q': (3, 80),
                         'V': [(2, 90), (3, 130)]},
@@ -40,7 +40,8 @@ def checkout(skus,
                               (2, 'F', 1, 'F'),
                               (3, 'N', 1, 'M'),
                               (3, 'R', 1, 'Q'),
-                              (3, 'U', 1, 'U')]):
+                              (3, 'U', 1, 'U')],
+            group_offers = [(3, ['S', 'T', 'X', 'Y', 'Z'], 45)]):
 
     if skus == '':
         return 0
@@ -72,6 +73,10 @@ def checkout(skus,
                     sku_count_dict[free_item] = max(0, sku_count_dict[free_item] - free_items)
 
     sum = 0
+    
+
+
+
     for k, v in sku_count_dict.items():
         if k in specials and isinstance(specials[k], list):
             best_price = float('inf')
@@ -107,5 +112,6 @@ def checkout(skus,
             sum += v * prices[k]
 
     return int(sum)
+
 
 
