@@ -6,7 +6,8 @@ def checkout(skus,
              prices = {'A': 50,
                         'B': 30,
                         'C': 20,
-                        'D': 15},
+                        'D': 15,
+                        'E': 40},
             specials = {'A': (3, 130),
                         'B': (2, 45)}):
 
@@ -37,3 +38,4 @@ def checkout(skus,
             sum += v * prices[k]
 
     return int(sum)
+
