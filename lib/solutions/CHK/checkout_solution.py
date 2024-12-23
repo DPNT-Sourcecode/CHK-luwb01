@@ -31,10 +31,15 @@ def checkout(skus,
     sku_count_dict = dict(Counter(skus_list))
 
     for (q_item1, item1, free_q, free_item) in specials_combo:
-        if item1 in sku_count_dict and free_item in sku_count_dict:
-            num_combo = sku_count_dict[item1] // q_item1
-            free_items = min(num_combo * free_q, sku_count_dict[free_item])
-            sku_count_dict[free_item] = max(0, sku_count_dict[free_item] - free_items)
+        if item1 in sku_count_dict:
+            if item1 == free_item:
+                if sku_count_dict[item1] >= q_item1 + free_q:
+                    num_combo = sku_count_dict[item1] // (q_item1 + free_q)
+                    sku_count_dict[item1] -= num_combo * free_q
+            else:
+                num_combo = sku_count_dict[item1] // q_item1
+                free_items = min(num_combo * free_q, sku_count_dict[free_item])
+                sku_count_dict[free_item] = max(0, sku_count_dict[free_item] - free_items)
 
     sum = 0
     for k, v in sku_count_dict.items():
@@ -72,5 +77,7 @@ def checkout(skus,
             sum += v * prices[k]
 
     return int(sum)
+
+print(checkout('AAAFFFEE'))
 
 
