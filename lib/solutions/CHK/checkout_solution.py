@@ -10,10 +10,11 @@ def checkout(skus,
             specials = {'A': (3, 130),
                         'B': (2, 45)}):
 
-    skus = skus.upper()
-
     if skus == '':
         return 0
+
+    if any(c.islower() for c in skus):
+        return -1
 
     if not isinstance(skus, str) or not skus.isalpha():
         return -1
