@@ -75,8 +75,9 @@ def checkout(skus,
     sum = 0
     for qt, item_group, offer_price in group_offers:
         group_counts = {item: sku_count_dict.get(item, 0) for item in item_group}
+        print(group_counts.values())
         total_group_items = sum(group_counts.values())
-
+        
         num_offers = total_group_items // qt
         
         if num_offers > 0:
@@ -134,5 +135,6 @@ def checkout(skus,
     return int(sum)
 
 print(checkout('STX'))
+
 
 
