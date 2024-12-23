@@ -38,6 +38,7 @@ def checkout(skus,
     sum = 0
     for k, v in sku_count_dict.items():
         if k in specials and isinstance(specials[k], list):
+            best_price = float('inf')
             remaining = v
 
             deals = specials[k]
@@ -69,16 +70,5 @@ def checkout(skus,
         else:
             sum += v * prices[k]
 
-    # sum = 0
-    # for k, v in sku_count_dict.items():
-    #     if k in specials:
-    #         num_specials = v // specials[k][0]
-    #         remainder = v % specials[k][0]
-    #         sum += (num_specials * specials[k][1]) + (remainder * prices[k])
-    #     else:
-    #         sum += v * prices[k]
-
     return int(sum)
-
-print(checkout('AAAAA'))
 
