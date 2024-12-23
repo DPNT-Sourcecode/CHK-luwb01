@@ -13,6 +13,9 @@ def checkout(skus,
     if not isinstance(skus, str) or not skus.isalpha():
         return -1
     
+    if set(skus) != set(prices.keys()):
+        return -1
+    
     skus = skus.upper()
 
     skus_list = [sku for sku in skus]
