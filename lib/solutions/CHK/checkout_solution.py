@@ -1,4 +1,4 @@
-
+from collections import Counter
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -12,3 +12,4 @@ def checkout(skus,
 
     skus_list = [sku for sku in skus]
 
+    sku_count_dict = dict(Counter(skus_list))
