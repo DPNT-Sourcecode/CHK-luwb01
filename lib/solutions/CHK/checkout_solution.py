@@ -13,3 +13,9 @@ def checkout(skus,
     skus_list = [sku for sku in skus]
 
     sku_count_dict = dict(Counter(skus_list))
+
+    sum = 0
+    for k, v in sku_count_dict.items():
+        if k in specials:
+            if v % specials[k][0] == 0:
+                sum += (v / specials[k][0]) * specials[k][1]
