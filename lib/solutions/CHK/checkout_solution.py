@@ -72,10 +72,9 @@ def checkout(skus,
                     free_items = min(num_combo * free_q, sku_count_dict[free_item])
                     sku_count_dict[free_item] = max(0, sku_count_dict[free_item] - free_items)
 
-    sum = 0
+    total = 0
     for qt, item_group, offer_price in group_offers:
         group_counts = {item: sku_count_dict.get(item, 0) for item in item_group}
-        print(group_counts.values())
         total_group_items = sum(group_counts.values())
         
         num_offers = total_group_items // qt
@@ -88,12 +87,12 @@ def checkout(skus,
             sorted_items = sorted([(item, cnt) for item, cnt in group_counts.items()], key=lambda x: prices[x[0]], reverse=True)
 
             for item, cnt in sorted_items:
-                if remove_items > 0:
+                if remove_items > 0 and item in sku_count_dict:
                     used = min(cnt, remove_items)
                     sku_count_dict[item] -= used
                     remove_items -= used
         
-        sum += num_offers * offer_price
+        total += num_offers * offer_price
 
     for k, v in sku_count_dict.items():
         if v <= 0:
@@ -120,7 +119,7 @@ def checkout(skus,
                 curr_price += remaining * prices[k]
                 best_price = min(best_price, curr_price)
             
-            sum += best_price
+            total += best_price
 
         elif k in specials:
             q, p = specials[k]
@@ -128,13 +127,11 @@ def checkout(skus,
             num_deals = v // q
             remaining = v % q
 
-            sum += (num_deals * p) + (remaining * prices[k])
+            total += (num_deals * p) + (remaining * prices[k])
         else:
-            sum += v * prices[k]
+            total += v * prices[k]
 
-    return int(sum)
-
-print(checkout('STX'))
+    return int(total)
 
 
 
