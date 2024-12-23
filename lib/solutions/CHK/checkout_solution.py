@@ -41,8 +41,10 @@ def checkout(skus,
     sum = 0
     for k, v in sku_count_dict.items():
         if k in specials:
-            if v >= specials[k][0]:
+            if v == specials[k][0]:
                 sum += (v / specials[k][0]) * specials[k][1]
+            elif v > specials[k][0]:
+                pass
             else:
                 sum += prices[k] * v
         else:
@@ -51,6 +53,7 @@ def checkout(skus,
     return int(sum)
 
 print(checkout('AAAA'))
+
 
 
 
