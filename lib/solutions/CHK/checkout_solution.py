@@ -53,7 +53,3 @@ def checkout(skus,
     return int(sum)
 
 print(checkout('AAAA'))
-
-
-
-
