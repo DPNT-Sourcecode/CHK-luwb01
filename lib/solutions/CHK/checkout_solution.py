@@ -10,6 +10,11 @@ def checkout(skus,
             specials = {'A': (3, 130),
                         'B': (2, 45)}):
 
+    if not isinstance(skus, str) or not skus.isalpha():
+        return -1
+    
+    skus = skus.upper()
+
     skus_list = [sku for sku in skus]
 
     sku_count_dict = dict(Counter(skus_list))
@@ -25,5 +30,3 @@ def checkout(skus,
             sum += prices[k]
 
     return int(sum)
-
-print(checkout('AAAAAABCD'))
