@@ -8,4 +8,3 @@ class TestSum():
         assert sum_solution.compute(0, 0) == 0
 
         assert sum_solution.compute(-1, 1) == 0
-
