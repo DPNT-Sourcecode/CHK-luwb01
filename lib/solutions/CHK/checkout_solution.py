@@ -49,6 +49,26 @@ def checkout(skus,
                 remaining = v - (first_deal_cnt * deals[-1][0])
                 curr_price += first_deal_cnt * deals[-1][1]
 
+                for q, p in deals[:-1]:
+                    deal_cnt = remaining // q
+                    remaining = remaining % q
+                    curr_price += deal_cnt * p
+
+                curr_price += remaining * prices[k]
+                best_price = min(best_price, curr_price)
+            
+            sum += best_price
+
+        elif k in specials:
+            q, p = specials[k]
+
+            num_deals = v // q
+            remaining = v % q
+
+            sum += (num_deals * p) + (remaining * prices[k])
+        else:
+            sum += v * prices[k]
+
     # sum = 0
     # for k, v in sku_count_dict.items():
     #     if k in specials:
@@ -61,3 +81,4 @@ def checkout(skus,
     return int(sum)
 
 print(checkout('AAAAA'))
+
