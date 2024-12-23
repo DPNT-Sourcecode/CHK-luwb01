@@ -73,14 +73,28 @@ def checkout(skus,
                     sku_count_dict[free_item] = max(0, sku_count_dict[free_item] - free_items)
 
     sum = 0
+    for qt, item_group, offer_price in group_offers:
+        group_counts = {item: sku_count_dict.get(item, 0) for item in item_group}
+        total_group_items = sum(group_counts.values())
 
+        num_offers = total_group_items // qt
+        if num_offers > 0:
+            remaining_items = total_group_items % qt
+
+            remove_items = num_offers * qt
+
+            sorted_items = sorted([(item, cnt) for item, cnt in group_counts.items()], key=lambda x: prices[x[0]], reverse=True)
+
+            for item, cnt in sorted_items:
+                if remove_items > 0:
+                    used = min(cnt, remove_items)
 
 
 
     for k, v in sku_count_dict.items():
         if v <= 0:
             continue
-        
+
         if k in specials and isinstance(specials[k], list):
             best_price = float('inf')
             remaining = v
@@ -115,5 +129,6 @@ def checkout(skus,
             sum += v * prices[k]
 
     return int(sum)
+
 
 
