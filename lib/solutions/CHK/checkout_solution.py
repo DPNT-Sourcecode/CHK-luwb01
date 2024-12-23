@@ -10,6 +10,8 @@ def checkout(skus,
             specials = {'A': (3, 130),
                         'B': (2, 45)}):
 
+    skus = skus.upper()
+
     if skus == '':
         return 0
 
@@ -19,8 +21,6 @@ def checkout(skus,
     for c in set(skus):
         if c not in set(prices.keys()):
             return -1
-    
-    skus = skus.upper()
 
     skus_list = [sku for sku in skus]
 
@@ -51,5 +51,6 @@ def checkout(skus,
     return int(sum)
 
 print(checkout('AAAA'))
+
 
 
