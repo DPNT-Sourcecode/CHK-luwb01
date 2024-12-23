@@ -37,12 +37,26 @@ def checkout(skus,
 
     sum = 0
     for k, v in sku_count_dict.items():
-        if k in specials:
-            num_specials = v // specials[k][0]
-            remainder = v % specials[k][0]
-            sum += (num_specials * specials[k][1]) + (remainder * prices[k])
-        else:
-            sum += v * prices[k]
+        if k in specials and isinstance(specials[k], list):
+            remaining = v
+
+            deals = specials[k]
+
+            biggest_deal = max(deal[0] for deal in deals)
+
+            for first_deal_cnt in range(v // biggest_deal + 1):
+                curr_price = 0
+                remaining = v - (first_deal_cnt * deals[-1][0])
+                curr_price += first_deal_cnt * deals[-1][1]
+
+    # sum = 0
+    # for k, v in sku_count_dict.items():
+    #     if k in specials:
+    #         num_specials = v // specials[k][0]
+    #         remainder = v % specials[k][0]
+    #         sum += (num_specials * specials[k][1]) + (remainder * prices[k])
+    #     else:
+    #         sum += v * prices[k]
 
     return int(sum)
 
