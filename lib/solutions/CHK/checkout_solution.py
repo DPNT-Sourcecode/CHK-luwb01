@@ -4,17 +4,18 @@ from collections import Counter
 # skus = unicode string
 def checkout(skus, 
              prices = {'A': 50,
-                            'B': 30,
-                            'C': 20,
-                            'D': 15},
+                        'B': 30,
+                        'C': 20,
+                        'D': 15},
             specials = {'A': (3, 130),
                         'B': (2, 45)}):
 
     if not isinstance(skus, str) or not skus.isalpha():
         return -1
     
-    if set(skus) != set(prices.keys()):
-        return -1
+    for c in set(skus):
+        if c not in set(prices.keys()):
+            return -1
     
     skus = skus.upper()
 
@@ -33,3 +34,4 @@ def checkout(skus,
             sum += prices[k]
 
     return int(sum)
+
