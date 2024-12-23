@@ -73,11 +73,14 @@ def checkout(skus,
                     sku_count_dict[free_item] = max(0, sku_count_dict[free_item] - free_items)
 
     sum = 0
-    
+
 
 
 
     for k, v in sku_count_dict.items():
+        if v <= 0:
+            continue
+        
         if k in specials and isinstance(specials[k], list):
             best_price = float('inf')
             remaining = v
@@ -112,4 +115,5 @@ def checkout(skus,
             sum += v * prices[k]
 
     return int(sum)
+
 
