@@ -9,7 +9,8 @@ def checkout(skus,
                         'D': 15,
                         'E': 40},
             specials = {'A': (3, 130),
-                        'B': (2, 45)}):
+                        'B': (2, 45)},
+            specials_combo = [(2, 'E', 1, 'B')]):
 
     if skus == '':
         return 0
@@ -28,6 +29,10 @@ def checkout(skus,
 
     sku_count_dict = dict(Counter(skus_list))
 
+    for (q_item1, item1, free_q, free_item) in specials_combo:
+        if item1 in sku_count_dict:
+            
+
     sum = 0
     for k, v in sku_count_dict.items():
         if k in specials:
@@ -38,4 +43,5 @@ def checkout(skus,
             sum += v * prices[k]
 
     return int(sum)
+
 
