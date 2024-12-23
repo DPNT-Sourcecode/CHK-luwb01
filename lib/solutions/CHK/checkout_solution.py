@@ -29,9 +29,11 @@ def checkout(skus,
             if v % specials[k][0] == 0:
                 sum += (v / specials[k][0]) * specials[k][1]
             else:
-                sum += prices[k]
+                sum += prices[k] * v
         else:
-            sum += prices[k]
+            sum += prices[k] * v
 
     return int(sum)
+
+print(checkout('AAAA'))
 
